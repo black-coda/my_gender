@@ -1,0 +1,46 @@
+name: my_gender
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  cached_memory_image: ^1.5.0
+  cached_network_image: ^3.3.1
+  cloud_firestore: ^4.17.5
+  collection: ^1.18.0
+  dio: ^5.4.3+1
+  firebase_auth: ^4.20.0
+  firebase_core: ^2.32.0
+  firebase_storage: ^11.7.7
+  flutter:
+    sdk: flutter
+  flutter_markdown: ^0.7.1
+  flutter_riverpod: ^2.5.1
+  font_awesome_flutter: ^10.7.0
+  google_generative_ai: ^0.4.3
+  google_sign_in: ^6.2.1
+  lottie: ^3.1.2
+  url_launcher: ^6.2.6
+
+dev_dependencies:
+  flutter_lints: ^3.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/animations/empty.json
+    - assets/animations/loading.json
+    - assets/animations/data_not_found.json
+    - assets/animations/error.json
+    - assets/animations/small_error.json
+  fonts:
+      - family: DS
+        fonts:
+          - asset: assets/font/ds.ttf
+         
