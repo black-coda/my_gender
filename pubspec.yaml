@@ -22,6 +22,8 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   google_generative_ai: ^0.4.3
   google_sign_in: ^6.2.1
+  image_picker: ^1.1.2
+  image_picker_android: ^0.8.12+3
   lottie: ^3.1.2
   url_launcher: ^6.2.6
 
@@ -40,7 +42,6 @@ flutter:
     - assets/animations/error.json
     - assets/animations/small_error.json
   fonts:
-      - family: DS
-        fonts:
-          - asset: assets/font/ds.ttf
-         
+    - family: DS
+      fonts:
+        - asset: assets/font/ds.ttf

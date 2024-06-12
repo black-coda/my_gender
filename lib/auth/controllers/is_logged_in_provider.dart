@@ -8,7 +8,7 @@ import 'auth_state_provider.dart';
 final isLoggedInProvider = Provider<bool>((ref) {
   final currentAuthState = ref.watch(authStateProvider);
   final isAlreadyLoggedIn = ref.watch(firebaseProvider).currentUser != null;
-  return currentAuthState.result == AuthResult.success && isAlreadyLoggedIn;
+  return currentAuthState.result == AuthResult.success || isAlreadyLoggedIn;
 });
 
 final authenticatorProvider = Provider<Authenticator>((ref) {

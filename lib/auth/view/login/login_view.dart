@@ -126,17 +126,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
                   height: 20,
                 ),
                 TextButton(
-                  onPressed:
-                      ref.read(authStateProvider.notifier).loginWithGoogle,
-                  style: TextButton.styleFrom(
-                      backgroundColor: AppColors.loginButtonColor,
-                      foregroundColor: AppColors.loginButtonTextColor,
-                      shape: const BeveledRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)))),
-                  child: const GoogleButton(),
-                ),
-                Konstant.sizedBoxHeight16,
-                TextButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       final email = emailController.text;
@@ -149,11 +138,22 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     }
                   },
                   style: TextButton.styleFrom(
-                      backgroundColor: AppColors.loginButtonColor,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       foregroundColor: AppColors.loginButtonTextColor,
                       shape: const BeveledRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5)))),
                   child: const GButton(),
+                ),
+                Konstant.sizedBoxHeight16,
+                TextButton(
+                  onPressed:
+                      ref.read(authStateProvider.notifier).loginWithGoogle,
+                  style: TextButton.styleFrom(
+                      backgroundColor: AppColors.loginButtonColor,
+                      foregroundColor: AppColors.loginButtonTextColor,
+                      shape: const BeveledRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)))),
+                  child: const GoogleButton(),
                 ),
                 const DividerWithMargin(),
                 const LoginViewRegisterLink(),

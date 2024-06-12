@@ -4,7 +4,6 @@ import 'package:my_gender/utils/constants/strings.dart';
 
 import 'loading_screen_controller.dart';
 
-
 class LoadingScreenWidget {
   //* One instance of the loading screen shared across the app
   LoadingScreenWidget._sharedInstance();
@@ -56,7 +55,7 @@ class LoadingScreenWidget {
               minWidth: size.width * 0.50,
             ),
             decoration: const BoxDecoration(
-                color: Colors.white ,
+                color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(10))),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -66,7 +65,7 @@ class LoadingScreenWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const SizedBox(height: 10),
-                   const CircularProgressIndicator(),
+                    const CircularProgressIndicator(color: Colors.pink),
                     const SizedBox(height: 10),
                     StreamBuilder<String>(
                       stream: textController.stream,

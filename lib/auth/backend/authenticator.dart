@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_gender/auth/constants/constants.dart';
 import 'package:my_gender/auth/models/user_info/models/user_dto.dart';
@@ -25,6 +27,7 @@ class Authenticator {
   //*Login Functionality
 
   // email and password login
+  // 77773389482513178
 
   Future<AuthResult> loginWithEmailAndPassword(UserDTO userDTO) async {
     try {
@@ -32,10 +35,10 @@ class Authenticator {
           email: userDTO.email, password: userDTO.password);
       return AuthResult.success;
     } catch (e) {
+      log(e.toString());
       return AuthResult.failure;
     }
   }
-
 
   // sign up
   Future<AuthResult> signUpWithEmailAndPassword(UserDTO userDTO) async {
@@ -44,6 +47,7 @@ class Authenticator {
           email: userDTO.email, password: userDTO.password);
       return AuthResult.success;
     } catch (e) {
+      log(e.toString());
       return AuthResult.failure;
     }
   }
@@ -87,4 +91,6 @@ class Authenticator {
       return AuthResult.failure;
     }
   }
+
+  //?
 }

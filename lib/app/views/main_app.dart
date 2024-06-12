@@ -5,7 +5,7 @@ import 'package:my_gender/app/views/widget/drawer.dart';
 import 'package:my_gender/bot/view/bot_chat_screen.dart';
 import 'package:my_gender/tips/controllers/tips_controller.dart';
 import 'package:my_gender/tips/views/tips_view.dart';
-import 'package:my_gender/users/backend/user_profle.dart';
+import 'package:my_gender/users/views/user_profle.dart';
 
 class MainView extends ConsumerStatefulWidget {
   const MainView({super.key});

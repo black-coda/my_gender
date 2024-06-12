@@ -34,17 +34,10 @@ class App extends ConsumerWidget {
     return MaterialApp(
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        // scaffoldBackgroundColor: ,
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Colors.pinkAccent,
         ),
-        // primarySwatch: Colors.blueGrey,
-
         colorSchemeSeed: Colors.pink,
-        // colorScheme: const ColorScheme.dark(
-        //     primary: Colors.pink, secondary: Colors.pinkAccent),
-        // colorScheme: ColorScheme.fromSwatch(
-        //     primarySwatch: Colors.pink, brightness: Brightness.light),
       ),
 
       //     ),
@@ -52,6 +45,19 @@ class App extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       home: Consumer(
         builder: (context, ref, child) {
+          // install the loading screen
+          ref.listen<bool>(
+            isLoadingProvider,
+            (_, isLoading) {
+              if (isLoading) {
+                LoadingScreenWidget.instance().show(
+                  context: context,
+                );
+              } else {
+                LoadingScreenWidget.instance().hide();
+              }
+            },
+          );
           final authChanges = ref.watch(authChangesStreamProvider);
           // install the loading screen
           return authChanges.when(

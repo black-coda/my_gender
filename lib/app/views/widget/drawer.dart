@@ -1,9 +1,9 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_gender/auth/controllers/auth_state_provider.dart';
 import 'package:my_gender/auth/controllers/firebase_base_provider.dart';
+import 'package:my_gender/users/views/user_profle.dart';
 import 'package:my_gender/utils/constants/konstant.dart';
 
 class MainViewDrawer extends ConsumerWidget {
@@ -22,11 +22,16 @@ class MainViewDrawer extends ConsumerWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: const BoxDecoration(
-              color: Colors.blue,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
             ),
             child: Column(
               children: [
+                const CircleAvatar(
+                  radius: 40,
+                  foregroundImage: NetworkImage(
+                      'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'),
+                ),
                 Text(displayName ?? "",
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.white,
@@ -43,8 +48,8 @@ class MainViewDrawer extends ConsumerWidget {
             leading: const Icon(Icons.person_rounded),
             title: const Text('Profile'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const UserProfileScreen()));
             },
           ),
           ListTile(
