@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import 'package:flutter/material.dart';
 
 class DynamicInputWidget extends StatelessWidget {
@@ -15,6 +9,7 @@ class DynamicInputWidget extends StatelessWidget {
       required this.obscureText,
       required this.focusNode,
       this.validator,
+      this.enabled = true,
       required this.prefIcon,
       required this.labelText,
       required this.textInputAction});
@@ -38,10 +33,13 @@ class DynamicInputWidget extends StatelessWidget {
   // The keyword action to display
   final TextInputAction textInputAction;
 
+  final bool? enabled;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      enabled: enabled,
       decoration: InputDecoration(
         border: const OutlineInputBorder(
           // Make border edge circular

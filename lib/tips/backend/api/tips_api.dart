@@ -16,6 +16,8 @@ class TipsApi {
         TipsApiKonstant.videoBaseEndpoint,
         queryParameters: TipsApiKonstant.videoBaseParams,
       );
+
+      // log(response.data.toString());
       return response;
     } catch (e) {
       rethrow;

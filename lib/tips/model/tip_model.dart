@@ -12,6 +12,7 @@ class TipsVideoModel {
   final String thumbnail;
   final String snippet;
   final String length;
+  final String image2;
   TipsVideoModel({
     required this.position,
     required this.title,
@@ -21,6 +22,7 @@ class TipsVideoModel {
     required this.thumbnail,
     required this.snippet,
     required this.length,
+    required this.image2,
   });
 
   Image? getThumbnailImage() {
@@ -28,7 +30,7 @@ class TipsVideoModel {
     final base64String = thumbnail.split(',')[1];
     final decodedBytes = base64Decode(base64String);
     return Image.memory(decodedBytes);
-    return null;
+   
   }
 
   TipsVideoModel copyWith({
@@ -40,6 +42,7 @@ class TipsVideoModel {
     String? thumbnail,
     String? snippet,
     String? length,
+    String? image2,
   }) {
     return TipsVideoModel(
       position: position ?? this.position,
@@ -50,6 +53,7 @@ class TipsVideoModel {
       thumbnail: thumbnail ?? this.thumbnail,
       snippet: snippet ?? this.snippet,
       length: length ?? this.length,
+      image2: image2 ?? this.image2,
     );
   }
 
@@ -63,6 +67,7 @@ class TipsVideoModel {
       'thumbnail': thumbnail,
       'snippet': snippet,
       'length': length,
+      'image2': image2,
     };
   }
 
@@ -89,6 +94,7 @@ class TipsVideoModel {
       thumbnail: map['thumbnail'] as String? ?? '',
       snippet: map['snippet'] as String? ?? '',
       length: map['length'] as String? ?? '',
+      image2: map['image'] as String? ?? '',
     );
   }
 
@@ -99,7 +105,7 @@ class TipsVideoModel {
 
   @override
   String toString() {
-    return 'TipsModel(position: $position, title: $title, link: $link, source: $source, date: $date, thumbnail: $thumbnail, snippet: $snippet, length: $length)';
+    return 'TipsModel(position: $position, title: $title, link: $link, source: $source, date: $date, thumbnail: $thumbnail, snippet: $snippet, length: $length, image2: $image2,)';
   }
 
   @override
@@ -114,6 +120,7 @@ class TipsVideoModel {
         other.thumbnail == thumbnail &&
         other.snippet == snippet &&
         other.length == length;
+        
   }
 
   @override
@@ -127,4 +134,10 @@ class TipsVideoModel {
         snippet.hashCode ^
         length.hashCode;
   }
+}
+
+
+
+class TipsArticleModel {
+  
 }

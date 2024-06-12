@@ -9,6 +9,7 @@ import 'package:my_gender/auth/controllers/firebase_base_provider.dart';
 import 'package:my_gender/utils/constants/konstant.dart';
 import 'package:my_gender/utils/image_picker_method.dart';
 
+import 'edit_profile_view.dart';
 import 'update_user_password.dart';
 
 class UserProfileScreen extends ConsumerStatefulWidget {
@@ -41,36 +42,23 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              CircleAvatar(
-                radius: 80,
-                foregroundImage: imageBytes != null
-                    ? MemoryImage(imageBytes!)
-                    : CachedNetworkImageProvider(
-                        photoUrl ??
-                            'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
-                      ),
-              ),
-              Positioned(
-                bottom: -10,
-                left: 180,
-                child: IconButton(
-                    onPressed: selectImage,
-                    icon: Icon(
-                      Icons.add_a_photo_rounded,
-                      color: Theme.of(context).colorScheme.primary,
-                    )),
-              ),
-            ],
+          CircleAvatar(
+            radius: 80,
+            foregroundImage: CachedNetworkImageProvider(
+              photoUrl ??
+                  'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
+            ),
           ),
           Konstant.sizedBoxHeight16,
           const Divider(),
           ListTile(
             leading: const Icon(Icons.person),
             title: const Text('Edit Profile'),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const EditProfileView(),
+              ));
+            },
           ),
           ListTile(
             leading: const Icon(Icons.lock),

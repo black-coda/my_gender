@@ -132,7 +132,8 @@ class _LoginViewState extends ConsumerState<RegisterView> {
                       final userDTO = UserDTO(email: email, password: password);
                       ref
                           .read(authStateProvider.notifier)
-                          .signUpWithEmailAndPassword(userDTO);
+                          .signUpWithEmailAndPassword(userDTO, context);
+                      
                     }
                   },
                   style: TextButton.styleFrom(

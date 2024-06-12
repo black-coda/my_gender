@@ -73,7 +73,7 @@ class _MainViewState extends ConsumerState<MainView> {
             label: 'MyGender Bot',
           ),
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.person),
+            icon: Icon(Icons.person_rounded),
             label: 'Profile',
           ),
         ],

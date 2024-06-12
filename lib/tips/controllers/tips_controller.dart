@@ -27,6 +27,7 @@ class GetVideoTipsNotifier extends StateNotifier<List<TipsVideoModel>> {
 
     final List<TipsVideoModel> tips =
         videos.map((e) => TipsVideoModel.fromMap(e)).toList();
+   
     isLoading = false;
     state = tips;
     return true;

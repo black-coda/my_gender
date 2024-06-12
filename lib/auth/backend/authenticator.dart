@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:my_gender/auth/constants/constants.dart';
 import 'package:my_gender/auth/models/user_info/models/user_dto.dart';
 import 'package:my_gender/utils/user_id_typedef.dart';
@@ -29,25 +30,39 @@ class Authenticator {
   // email and password login
   // 77773389482513178
 
-  Future<AuthResult> loginWithEmailAndPassword(UserDTO userDTO) async {
+  Future<AuthResult> loginWithEmailAndPassword(UserDTO userDTO, context) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: userDTO.email, password: userDTO.password);
       return AuthResult.success;
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       log(e.toString());
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("${e.message}"),
+        ),
+      );
+
       return AuthResult.failure;
     }
   }
 
   // sign up
-  Future<AuthResult> signUpWithEmailAndPassword(UserDTO userDTO) async {
+  Future<AuthResult> signUpWithEmailAndPassword(UserDTO userDTO, context) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: userDTO.email, password: userDTO.password);
       return AuthResult.success;
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       log(e.toString());
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("${e.message}"),
+        ),
+      );
+
       return AuthResult.failure;
     }
   }

@@ -134,7 +134,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       final userDTO = UserDTO(email: email, password: password);
                       ref
                           .read(authStateProvider.notifier)
-                          .loginWithEmailAndPassword(userDTO);
+                          .loginWithEmailAndPassword(userDTO, context);
                     }
                   },
                   style: TextButton.styleFrom(
