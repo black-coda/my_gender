@@ -29,9 +29,9 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     state = const AuthState.unknown();
   }
 
-  Future<void> loginWithGoogle() async {
+  Future<void> loginWithGoogle(context) async {
     state = state.copiedWithIsLoading(true);
-    final result = await _authenticator.loginWithGoogle();
+    final result = await _authenticator.loginWithGoogle(context);
     final userId = _authenticator.userId;
     if (result == AuthResult.success && userId != null) {
       await saveUserInfo(userId: userId);
@@ -67,23 +67,19 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     final userId = _authenticator.userId;
     if (result == AuthResult.success && userId != null) {
       await saveUserInfo(userId: userId);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("User created successfully! Please login to continue."),
+        ),
+      );
+      state = const AuthState.unknown();
       Navigator.of(context)
           .push(
         MaterialPageRoute(
           builder: (context) => const LoginView(),
         ),
-      )
-          .then(
-        (value) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content:
-                  Text("User created successfully! Please login to continue."),
-            ),
-          );
-          return state = const AuthState.unknown();
-        },
       );
+        
     }
     state = AuthState(
       result: result,

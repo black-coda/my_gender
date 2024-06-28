@@ -70,13 +70,6 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.notifications),
-            title: const Text('Notification Settings'),
-            onTap: () {
-              // TODO: Implement notification settings functionality
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Logout'),
             onTap: ref.read(authStateProvider.notifier).logOut,

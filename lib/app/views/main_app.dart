@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_gender/app/views/widget/drawer.dart';
+import 'package:my_gender/auth/controllers/firebase_base_provider.dart';
 import 'package:my_gender/bot/view/bot_chat_screen.dart';
-import 'package:my_gender/tips/controllers/tips_controller.dart';
 import 'package:my_gender/tips/views/tips_view.dart';
+import 'package:my_gender/tracker/views/dashboard_view.dart';
+import 'package:my_gender/users/views/edit_profile_view.dart';
 import 'package:my_gender/users/views/user_profle.dart';
 
 class MainView extends ConsumerStatefulWidget {
@@ -19,10 +21,7 @@ class _MainViewState extends ConsumerState<MainView> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
+    DashboardView(),
     TipsView(),
     BotChatView(),
     UserProfileScreen(),
@@ -36,6 +35,8 @@ class _MainViewState extends ConsumerState<MainView> {
 
   @override
   Widget build(BuildContext context) {
+    final photoUrl = ref.read(firebaseProvider).currentUser?.photoURL;
+    final updatedPhotoUrl = ref.watch(photoUrlProvider.notifier).state;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -47,7 +48,20 @@ class _MainViewState extends ConsumerState<MainView> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.search_rounded),
+            icon: updatedPhotoUrl == null
+                ? CircleAvatar(
+                    radius: 15,
+                    backgroundImage: NetworkImage(
+                      photoUrl ??
+                          'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
+                    ),
+                  )
+                : CircleAvatar(
+                    radius: 15,
+                    backgroundImage: MemoryImage(
+                      updatedPhotoUrl,
+                    ),
+                  ),
             onPressed: () {
               // do something
             },

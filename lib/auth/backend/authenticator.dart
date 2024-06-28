@@ -49,7 +49,8 @@ class Authenticator {
   }
 
   // sign up
-  Future<AuthResult> signUpWithEmailAndPassword(UserDTO userDTO, context) async {
+  Future<AuthResult> signUpWithEmailAndPassword(
+      UserDTO userDTO, context) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: userDTO.email, password: userDTO.password);
@@ -69,7 +70,7 @@ class Authenticator {
 
   //? Login with google credential
 
-  Future<AuthResult> loginWithGoogle() async {
+  Future<AuthResult> loginWithGoogle(context) async {
     //?   Creates a GoogleSignIn object with the email scope.
 
     final GoogleSignIn googleSignIn = GoogleSignIn(scopes: [
@@ -102,7 +103,14 @@ class Authenticator {
       await FirebaseAuth.instance.signInWithCredential(oauthCredential);
 
       return AuthResult.success;
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
+      log(e.toString());
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("${e.message}"),
+        ),
+      );
       return AuthResult.failure;
     }
   }

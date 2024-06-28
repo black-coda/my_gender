@@ -1,6 +1,8 @@
 {
     "cSpell.words": [
+        "prefs",
         "widgte"
     ],
-    "editor.fontFamily": "\"Consolas\", 'Courier New', monospace"
+    "editor.fontFamily": "\"ibm plex mono\",\"consolas\",firacode,\"jetbrains mono\", 'Courier New', monospace",
+    "editor.fontSize": 15
 }
