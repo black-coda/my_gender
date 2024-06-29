@@ -20,6 +20,7 @@ dependencies:
   flutter_markdown: ^0.7.1
   flutter_riverpod: ^2.5.1
   font_awesome_flutter: ^10.7.0
+  go_router: ^14.2.0
   google_generative_ai: ^0.4.3
   google_sign_in: ^6.2.1
   image_picker: ^1.1.2
