@@ -7,6 +7,7 @@ import 'package:my_gender/firebase_options.dart';
 import 'app/views/main_app.dart';
 import 'auth/controllers/is_loading_provider.dart';
 import 'auth/view/login/login_view.dart';
+import 'notification/service/notification_service.dart';
 import 'utils/loading/loading_screen_widget.dart';
 
 void main() async {
@@ -14,6 +15,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await NotificationService().init();
   runApp(
     const ProviderScope(
       child: App(),
@@ -60,7 +63,8 @@ class App extends ConsumerWidget {
           // install the loading screen
           return authChanges.when(
             data: (data) {
-              return data == null ? const LoginView() : const MainView();
+              // final userId = ref.watch()
+              return data == null ? const OnboardingScreen() : const MainView();
             },
             error: (error, stackTrace) => Center(
               child: Text("Error ${error.toString()}"),

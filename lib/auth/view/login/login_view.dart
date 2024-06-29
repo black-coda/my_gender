@@ -146,8 +146,8 @@ class _LoginViewState extends ConsumerState<LoginView> {
                 ),
                 Konstant.sizedBoxHeight16,
                 TextButton(
-                  onPressed:
-                      ref.read(authStateProvider.notifier).loginWithGoogle,
+                  onPressed: () async => 
+                      ref.read(authStateProvider.notifier).loginWithGoogle(context),
                   style: TextButton.styleFrom(
                       backgroundColor: AppColors.loginButtonColor,
                       foregroundColor: AppColors.loginButtonTextColor,

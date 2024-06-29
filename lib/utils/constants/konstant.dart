@@ -6,6 +6,7 @@ class Konstant {
   static const SizedBox sizedBoxHeight4 = SizedBox(height: 4);
   static const SizedBox sizedBoxHeight2 = SizedBox(height: 2);
   static const SizedBox sizedBoxHeight16 = SizedBox(height: 16);
+  static const SizedBox sizedBoxHeight32 = SizedBox(height: 32);
 
   Konstant._();
 }

@@ -139,5 +139,106 @@ class TipsVideoModel {
 
 
 class TipsArticleModel {
+   final int position;
+  final String title;
+  final String link;
+  final String domain;
+  final String displayedLink;
+  final String snippet;
+  final bool prerender;
+  final int blockPosition;
+  TipsArticleModel({
+    required this.position,
+    required this.title,
+    required this.link,
+    required this.domain,
+    required this.displayedLink,
+    required this.snippet,
+    required this.prerender,
+    required this.blockPosition,
+  });
+
+  TipsArticleModel copyWith({
+    int? position,
+    String? title,
+    String? link,
+    String? domain,
+    String? displayedLink,
+    String? snippet,
+    bool? prerender,
+    int? blockPosition,
+  }) {
+    return TipsArticleModel(
+      position: position ?? this.position,
+      title: title ?? this.title,
+      link: link ?? this.link,
+      domain: domain ?? this.domain,
+      displayedLink: displayedLink ?? this.displayedLink,
+      snippet: snippet ?? this.snippet,
+      prerender: prerender ?? this.prerender,
+      blockPosition: blockPosition ?? this.blockPosition,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'position': position,
+      'title': title,
+      'link': link,
+      'domain': domain,
+      'displayedLink': displayedLink,
+      'snippet': snippet,
+      'prerender': prerender,
+      'blockPosition': blockPosition,
+    };
+  }
+
+  factory TipsArticleModel.fromMap(Map<String, dynamic> map) {
+    return TipsArticleModel(
+      position: map['position'] as int,
+      title: map['title'] as String? ?? '',
+      link: map['link'] as String? ?? '',
+      domain: map['domain'] as String? ?? '',
+      displayedLink: map['displayedLink'] as String? ?? '',
+      snippet: map['snippet'] as String? ?? '',
+      prerender: map['prerender'] as bool? ?? false,
+      blockPosition: map['blockPosition'] as int? ?? 0,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory TipsArticleModel.fromJson(String source) => TipsArticleModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'TipsArticleModel(position: $position, title: $title, link: $link, domain: $domain, displayedLink: $displayedLink, snippet: $snippet, prerender: $prerender, blockPosition: $blockPosition)';
+  }
+
+  @override
+  bool operator ==(covariant TipsArticleModel other) {
+    if (identical(this, other)) return true;
   
+    return 
+      other.position == position &&
+      other.title == title &&
+      other.link == link &&
+      other.domain == domain &&
+      other.displayedLink == displayedLink &&
+      other.snippet == snippet &&
+      other.prerender == prerender &&
+      other.blockPosition == blockPosition;
+  }
+
+  @override
+  int get hashCode {
+    return position.hashCode ^
+      title.hashCode ^
+      link.hashCode ^
+      domain.hashCode ^
+      displayedLink.hashCode ^
+      snippet.hashCode ^
+      prerender.hashCode ^
+      blockPosition.hashCode;
+  }
 }

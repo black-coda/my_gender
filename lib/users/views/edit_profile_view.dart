@@ -70,7 +70,7 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
 
   @override
   Widget build(BuildContext context) {
-    // final photoUrl = ref.read(firebaseProvider).currentUser?.photoURL;
+    final photoUrl = ref.read(firebaseProvider).currentUser?.photoURL;
 
     // Uint8List? imageBytes;
 
@@ -102,11 +102,11 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
                       alignment: Alignment.center,
                       children: [
                         imageBytes == null
-                            ? const CircleAvatar(
+                            ? CircleAvatar(
                                 radius: 80,
                                 foregroundImage: CachedNetworkImageProvider(
-                                  'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
-                                ),
+                                    photoUrl ??
+                                        'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'),
                               )
                             : CircleAvatar(
                                 radius: 80,

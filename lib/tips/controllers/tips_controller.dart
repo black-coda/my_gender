@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_gender/tips/backend/api/tips_api.dart';
@@ -11,40 +9,39 @@ class GetVideoTipsNotifier extends StateNotifier<List<TipsVideoModel>> {
   GetVideoTipsNotifier({required this.tipsApi}) : super([]);
 
   final TipsApi tipsApi;
-  bool isLoading = false;
 
-  Future<bool> getTipsVideo() async {
-    isLoading = true;
+  List<TipsArticleModel> articles = [];
+
+  Future<List<TipsVideoModel>> getTipsVideo() async {
     final Response response = await tipsApi.getVideoTips();
     if (response.statusCode != 200 ||
         response.data == null ||
         response.data.isEmpty) {
-      isLoading = false;
-      return false;
+      return [];
     }
 
     final videos = response.data['videos'] as List;
 
     final List<TipsVideoModel> tips =
         videos.map((e) => TipsVideoModel.fromMap(e)).toList();
-   
-    isLoading = false;
+
     state = tips;
-    return true;
+    return state;
   }
 
-  Future<void> getTipsVideos() async {
-    final Response response = await tipsApi.getVideoTips();
+  Future<List<TipsArticleModel>> getTipsArticles() async {
+    final Response response = await tipsApi.getArticlesTips();
     if (response.statusCode != 200 ||
         response.data == null ||
         response.data.isEmpty) {}
 
-    final videos = response.data['videos'] as List;
+    final videos = response.data['organic_results'] as List;
 
-    final List<TipsVideoModel> tips =
-        videos.map((e) => TipsVideoModel.fromMap(e)).toList();
+    final List<TipsArticleModel> tips =
+        videos.map((e) => TipsArticleModel.fromMap(e)).toList();
 
-    state = tips;
+    articles = tips;
+    return articles;
   }
 }
 
@@ -59,8 +56,17 @@ final getVideoTipsStateNotifierProvider =
   return GetVideoTipsNotifier(tipsApi: tipsApi);
 });
 
-final getVideosFutureProvider = FutureProvider<void>((ref) async {
-  final videos =
-      ref.watch(getVideoTipsStateNotifierProvider.notifier).getTipsVideos();
+final getVideosFutureProvider =
+    FutureProvider<List<TipsVideoModel>>((ref) async {
+  final videos = await ref
+      .watch(getVideoTipsStateNotifierProvider.notifier)
+      .getTipsVideo();
   return videos;
+});
+
+final getArticlesFutureProvider =
+    FutureProvider<List<TipsArticleModel>>((ref) async {
+  final articles =
+      ref.read(getVideoTipsStateNotifierProvider.notifier).getTipsArticles();
+  return articles;
 });

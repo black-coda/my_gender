@@ -14,10 +14,14 @@ dependencies:
   dio: ^5.4.3+1
   firebase_auth: ^4.20.0
   firebase_core: ^2.32.0
+  firebase_messaging: ^14.9.4
   firebase_storage: ^11.7.7
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  flutter_local_notifications: ^17.1.2
   flutter_markdown: ^0.7.1
+  flutter_native_splash: ^2.4.0
   flutter_riverpod: ^2.5.1
   font_awesome_flutter: ^10.7.0
   go_router: ^14.2.0
@@ -25,7 +29,12 @@ dependencies:
   google_sign_in: ^6.2.1
   image_picker: ^1.1.2
   image_picker_android: ^0.8.12+3
+  intl: ^0.19.0
   lottie: ^3.1.2
+  material_design_icons_flutter: ^7.0.7296
+  shared_preferences: ^2.2.3
+  syncfusion_flutter_datepicker: ^26.1.35
+  table_calendar: ^3.1.2
   url_launcher: ^6.2.6
 
 dev_dependencies:
@@ -42,7 +51,16 @@ flutter:
     - assets/animations/data_not_found.json
     - assets/animations/error.json
     - assets/animations/small_error.json
+    - assets/images/
+    - assets/lottie/
   fonts:
     - family: DS
       fonts:
         - asset: assets/font/ds.ttf
+
+flutter_native_splash:
+  background_image: assets/logo/splash.png
+  android: true
+  android_12:
+    image: assets/logo/logo_2.png
+    # color: "#000000"
