@@ -3,6 +3,5 @@
         "prefs",
         "widgte"
     ],
-    "editor.fontFamily": "\"ibm plex mono\",\"consolas\",firacode,\"jetbrains mono\", 'Courier New', monospace",
-    "editor.fontSize": 15
+    "editor.fontFamily": "\"ibm plex mono\",\"Consolas\", 'Courier New', monospace"
 }
