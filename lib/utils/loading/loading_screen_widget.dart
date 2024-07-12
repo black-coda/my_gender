@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:my_gender/utils/constants/strings.dart';
 
@@ -65,7 +66,7 @@ class LoadingScreenWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const SizedBox(height: 10),
-                    const CircularProgressIndicator(color: Colors.pink),
+                    const CircularProgressIndicator(),
                     const SizedBox(height: 10),
                     StreamBuilder<String>(
                       stream: textController.stream,

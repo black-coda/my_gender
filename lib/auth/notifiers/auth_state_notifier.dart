@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:my_gender/auth/models/auth_result.dart';
 import 'package:my_gender/auth/models/auth_state.dart';
 import 'package:my_gender/auth/models/user_info/backend/user_info.dart';
+import 'package:my_gender/router/route_manager.dart';
 import 'package:my_gender/utils/user_id_typedef.dart';
 
 import '../backend/authenticator.dart';
 import '../models/user_info/models/user_dto.dart';
-import '../view/login/login_view.dart';
 
 class AuthStateNotifier extends StateNotifier<AuthState> {
   final _authenticator = const Authenticator();
@@ -73,13 +74,9 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         ),
       );
       state = const AuthState.unknown();
-      Navigator.of(context)
-          .push(
-        MaterialPageRoute(
-          builder: (context) => const LoginView(),
-        ),
+      GoRouter.of(context).pushNamed(
+        RouteManager.loginView,
       );
-        
     }
     state = AuthState(
       result: result,

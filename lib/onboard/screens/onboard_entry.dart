@@ -1,6 +1,6 @@
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:923516635.
 import 'package:flutter/material.dart';
-
+import 'package:my_gender/app/controller/initial_entry_service.dart';
 import '../widgets/dot_indicator.dart';
 import 'intro_screen.dart';
 import 'onboard_1.dart';
@@ -8,7 +8,6 @@ import 'onboard_2.dart';
 import 'onboard_3.dart';
 import 'onboard_4.dart';
 import 'onboard_question1.dart';
-import 'onboard_question_2.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -34,7 +33,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     Onboard3(),
     Onboard4(),
     OnboardQuestion1(),
-    OnboardQuestion2(),
   ];
 
   @override
@@ -100,8 +98,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       width: 80,
                       child: currentPage == _pages.length - 1
                           ? TextButton(
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
+                              onPressed: () async {
+                                final navigator = Navigator.of(context);
+                                await InitialEntryService.initializer();
+                                navigator.push(MaterialPageRoute(
                                     builder: (context) => const IntroScreen()));
                               },
                               child: const Text("Finish"))

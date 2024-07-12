@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:my_gender/tips/constant/tips_konstant.dart';
-import 'package:my_gender/tips/model/tip_model.dart';
 
 class TipsApi {
   final Dio _dio;

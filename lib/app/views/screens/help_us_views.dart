@@ -23,9 +23,9 @@ class HelpScreen extends StatelessWidget {
               const Text(
                 'Welcome to Menstrual App',
                 style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.pink),
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 10),
               const Text(

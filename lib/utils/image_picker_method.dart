@@ -1,6 +1,4 @@
 import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_android/image_picker_android.dart';
-import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 
 pickImage(ImageSource src) async {
   // final ImagePickerPlatform imagePickerImplementation =

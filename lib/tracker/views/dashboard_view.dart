@@ -75,13 +75,11 @@ class _MenstrualPeriodScreenState extends ConsumerState<MenstrualPeriodScreen> {
                 'Good morning,',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              Text(
-                userName,
-                style: const TextStyle(
-                    fontSize: 24,
-                    color: Colors.pink,
-                    fontWeight: FontWeight.bold),
-              ),
+              Text(userName,
+                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 24,
+                      )),
               const SizedBox(height: 20),
               CalendarDatePicker(
                 initialDate: currentDate,
@@ -94,12 +92,14 @@ class _MenstrualPeriodScreenState extends ConsumerState<MenstrualPeriodScreen> {
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.pink[100],
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
                 child: Text(
-                  'Your period is likely to start on or around ${DateFormat('MMMM d').format(predictedDate)}',
-                  style: TextStyle(color: Colors.pink[900], fontSize: 16),
-                ),
+                    'Your period is likely to start on or around ${DateFormat('MMMM d').format(predictedDate)}',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.onSecondary,
+                          fontSize: 16,
+                        )),
               ),
               const SizedBox(height: 20),
               const Text(
@@ -108,19 +108,21 @@ class _MenstrualPeriodScreenState extends ConsumerState<MenstrualPeriodScreen> {
               ),
               const SizedBox(height: 10),
               ListTile(
-                leading: const Icon(Icons.calendar_today, color: Colors.red),
+                leading: const Icon(
+                  Icons.calendar_today,
+                ),
                 title: Text(
                     'Started ${DateFormat('MMMM d').format(lastStartDate)}'),
                 subtitle: Text(
                     '${DateTime.now().difference(lastStartDate).inDays} days ago'),
               ),
               ListTile(
-                leading: const Icon(Icons.access_time, color: Colors.red),
+                leading: const Icon(Icons.access_time),
                 title: Text('Period Length: $periodLength days'),
                 subtitle: const Text('Normal'),
               ),
               ListTile(
-                leading: const Icon(Icons.repeat, color: Colors.red),
+                leading: const Icon(Icons.repeat),
                 title: Text('Cycle Length: $cycleLength days'),
                 subtitle: const Text('Normal'),
               ),
@@ -130,7 +132,6 @@ class _MenstrualPeriodScreenState extends ConsumerState<MenstrualPeriodScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _logLastPeriod,
-        backgroundColor: Colors.pink,
         child: const Icon(Icons.edit),
       ),
     );

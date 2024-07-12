@@ -50,6 +50,7 @@ class UserProfileBackend {
     User? user = ref.watch(firebaseProvider).currentUser;
 
     if (user != null) {
+      final getPhotoUrl = user.photoURL;
       // Update profile in Firebase Authentication
       await user.updateDisplayName(userProfileDTO.displayName);
       await user.updatePhotoURL(userProfileDTO.photoUrl);
@@ -57,12 +58,11 @@ class UserProfileBackend {
       // Update additional fields in Firestore
       final userDoc =
           FirebaseFirestore.instance.collection('users').doc(user.uid);
-      await userDoc.set({
-        'displayName': userProfileDTO.displayName,
-        'email': userProfileDTO.email,
-        'dob': userProfileDTO.dob,
-        'photoUrl': userProfileDTO.photoUrl,
-      }, SetOptions(merge: true));
+
+         
+      await userDoc.set(
+        userProfileDTO.toMap(),
+       SetOptions(merge: true));
       return true;
     }
     return false;

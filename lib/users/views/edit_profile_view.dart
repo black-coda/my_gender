@@ -24,7 +24,6 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
   late TextEditingController _displayNameController;
   late TextEditingController _emailController;
   late TextEditingController _dobController;
-  late TextEditingController _photoUrlController;
 
   late FocusNode _displayNameFocusNode;
   late FocusNode _dobFocusNode;
@@ -48,12 +47,13 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
     final email = ref.read(firebaseProvider).currentUser?.email;
     final userData = ref.watch(getUserDataProvider).asData?.value;
     final displayName = userData?.displayName;
+    final displayName2 = ref.read(firebaseProvider).currentUser?.displayName;
     final dob = userData?.dob;
 
-    _displayNameController = TextEditingController(text: displayName);
+    _displayNameController =
+        TextEditingController(text: displayName ?? displayName2);
     _emailController = TextEditingController(text: email);
     _dobController = TextEditingController(text: dob);
-    _photoUrlController = TextEditingController();
   }
 
   @override
@@ -64,7 +64,7 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
     _displayNameController.dispose();
     _emailController.dispose();
     _dobController.dispose();
-    _photoUrlController.dispose();
+
     super.dispose();
   }
 
@@ -146,7 +146,7 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
                         labelText: "Display Name",
                         textInputAction: TextInputAction.next),
                     const SizedBox(height: 16.0),
-                    ElevatedButton(
+                    ElevatedButton.icon(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           ref
@@ -156,7 +156,7 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
                                   displayName: _displayNameController.text,
                                   email: _emailController.text,
                                   dob: _dobController.text,
-                                  photoUrl: '',
+                                  photoUrl: photoUrl!,
                                 ),
                               )
                               .then((value) {
@@ -176,7 +176,8 @@ class _EditProfileViewState extends ConsumerState<EditProfileView> {
                           });
                         }
                       },
-                      child: const Text('Save Changes'),
+                      icon: const Icon(Icons.save_rounded),
+                      label: const Text('Save Changes'),
                     ),
                   ],
                 ),
