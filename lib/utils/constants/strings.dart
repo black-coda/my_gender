@@ -70,4 +70,10 @@ class Strings {
   static const areYouSureThatYouWantToLogOutOfTheApp =
       'Are you sure that you want to log out of the app?';
   static const cancel = 'Cancel';
+
+
+
+
+  //! key
+  static const firstTimeKey = "first_time";
 }

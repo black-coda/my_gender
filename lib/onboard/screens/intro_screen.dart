@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:go_router/go_router.dart';
+import 'package:my_gender/router/route_manager.dart';
 
 import '../../auth/view/login/login_view.dart';
 
@@ -28,10 +29,7 @@ class _IntroScreenState extends State<IntroScreen>
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           // Navigate to another screen when the animation is complete
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const LoginView()),
-          );
+          GoRouter.of(context).pushReplacementNamed(RouteManager.loginView);
         }
       });
 

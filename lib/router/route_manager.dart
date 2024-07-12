@@ -1,48 +1,60 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_gender/app/views/main_app.dart';
-import 'package:my_gender/auth/controllers/auth_state_provider.dart';
-import 'package:my_gender/auth/models/auth_result.dart';
+import 'package:my_gender/auth/controllers/is_logged_in_provider.dart';
 import 'package:my_gender/auth/view/login/login_view.dart';
+import 'package:my_gender/onboard/screens/onboard_entry.dart';
+import 'package:my_gender/utils/constants/strings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final routerProvider = Provider<GoRouter>(
   (ref) {
-    final authState = ref.watch(authStateProvider);
+    final authState = ref.watch(isLoggedInProvider);
     return GoRouter(
-      redirect: (context, state) {
-        final loggedIn = authState.result == AuthResult.success;
+      redirect: (context, state) async {
+        final SharedPreferences preferences = await SharedPreferences.getInstance();
+
+        final bool ? firstTime = preferences.getBool(Strings.firstTimeKey);
+        if ( firstTime == null || !firstTime ) {
+          return RouteManager.onboardingRoute;
+        }
+        
+        final loggedIn = authState;
         final isLoginRoute = state.path == RouteManager.loginRoute;
 
         if (!loggedIn && !isLoginRoute) return RouteManager.loginRoute;
         if (loggedIn && isLoginRoute) return RouteManager.dashboardRoute;
-
+        if (loggedIn) return RouteManager.dashboardRoute;
         return null;
       },
       initialLocation: RouteManager.onboardingRoute,
       routes: [
         GoRoute(
-          path: '/login',
+          path: RouteManager.loginRoute,
+          name: RouteManager.loginView,
           builder: (context, state) => const LoginView(),
         ),
         GoRoute(
-          path: '/dashboard',
+          path: RouteManager.dashboardRoute,
+          name: RouteManager.dashboardView,
           builder: (context, state) => const MainView(),
         ),
-        GoRoute(path: RouteManager.onboardingRoute, builder: (context, state) {
-          return const OnboardView();
-        }),
+        GoRoute(
+          path: RouteManager.onboardingRoute,
+          name: RouteManager.onboardingView,
+          builder: (context, state) {
+            return const OnboardingScreen();
+          },
+        ),
       ],
     );
   },
 );
 
-
-
 class RouteManager {
   //! Onboarding Routes
   static const onboardingRoute = '/onboarding';
   static const onboardingView = "onboarding";
-
 
   //! Authentication Routes
   static const loginRoute = '/login';
@@ -53,7 +65,6 @@ class RouteManager {
   static const registerView = "register";
   static const forgotPasswordRoute = '/forgot-password';
   static const forgotPasswordView = "forgot-password";
-
 
   //! Non Authentication Routes
   static const dashboardRoute = '/dashboard';
@@ -68,5 +79,4 @@ class RouteManager {
   static const settingsView = "settings";
   static const aboutRoute = '/about';
   static const aboutView = "about";
-  
 }

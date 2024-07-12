@@ -54,13 +54,13 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 onPageChanged: (focusedDay) {
                   _focusedDay = focusedDay;
                 },
-                calendarStyle: const CalendarStyle(
-                  todayDecoration: BoxDecoration(
-                    color: Colors.blueAccent,
+                calendarStyle: CalendarStyle(
+                  todayDecoration: const BoxDecoration(
+                    color: Colors.blue,
                     shape: BoxShape.circle,
                   ),
                   selectedDecoration: BoxDecoration(
-                    color: Colors.pink,
+                    color: Theme.of(context).colorScheme.secondary,
                     shape: BoxShape.circle,
                   ),
                   markersMaxCount: 1,
@@ -107,7 +107,6 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         onPressed: () {
           _showAddPeriodDialog(context);
         },
-        backgroundColor: Colors.pink,
         child: const Icon(Icons.edit),
       ),
     );

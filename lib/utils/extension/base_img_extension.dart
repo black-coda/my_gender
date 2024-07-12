@@ -7,7 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 // Base64 Image Extension
 extension Base64ImageExtension on String {
   Future<String> _base64ToFile() async {
-    final base64String = this.split(',')[1];
+    final base64String = split(',')[1];
     final decodedBytes = base64Decode(base64String);
 
     final tempDir = await getTemporaryDirectory();
@@ -23,8 +23,8 @@ extension Base64ImageExtension on String {
     final filePath = await _base64ToFile();
     return CachedNetworkImage(
       imageUrl: 'file://$filePath',
-      placeholder: (context, url) => CircularProgressIndicator(),
-      errorWidget: (context, url, error) => Icon(Icons.error),
+      placeholder: (context, url) => const CircularProgressIndicator(),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }
 }

@@ -16,6 +16,7 @@ class UserInfoStorage {
     required UserId userId,
     required String displayName,
     required String? email,
+    String? photoUrl,
   }) async {
     try {
       final userInfo = await db
@@ -38,9 +39,13 @@ class UserInfoStorage {
         userId: userId,
         displayName: displayName,
         email: email,
+        photoUrl: photoUrl,
       );
 
-      await db.collection(FirebaseCollectionName.users).add(payload);
+      await db
+          .collection(FirebaseCollectionName.users)
+          .doc(userId)
+          .set(payload);
       return true;
     } catch (e) {
       e.log();

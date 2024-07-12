@@ -58,12 +58,12 @@ class PeriodTracker {
 
   // Calculate average cycle length
   double getAverageCycleLength(List<Period> periods) {
-    if (periods.isEmpty) return 0.0; // Handle empty history
+    if (periods.length < 2) return 0.0; // Handle not enough data
 
     List<int> cycleLengths = [];
     for (int i = 1; i < periods.length; i++) {
       final diffInDays =
-          periods[i].startDate.difference(periods[i - 1].endDate).inDays;
+          periods[i].startDate.difference(periods[i - 1].startDate).inDays;
       cycleLengths.add(diffInDays);
     }
     return cycleLengths.reduce((a, b) => a + b) /
@@ -79,30 +79,22 @@ class PeriodTracker {
     final averageCycleLength = getAverageCycleLength(periods);
     if (averageCycleLength == 0.0) return DateTime.now(); // Handle no data
 
-    return lastPeriod.endDate.add(Duration(days: averageCycleLength.round()));
+    return lastPeriod.startDate.add(Duration(days: averageCycleLength.round()));
   }
 }
 
-// Example usage
 void main() async {
-  final periodTracker = PeriodTracker();
+  PeriodTracker tracker = PeriodTracker();
 
-  // Example: Add a new period
-  final period1 = Period(
-    startDate: DateTime.now().subtract(const Duration(days: 28)),
-    endDate: DateTime.now().subtract(const Duration(days: 24)),
+  // Example: Save a new period
+  await tracker.savePeriod(Period(
+    startDate: DateTime(2023, 6, 1),
+    endDate: DateTime(2023, 6, 5),
     flowIntensity: FlowIntensity.medium,
-    symptoms: ['Cramps'],
-  );
-  await periodTracker.savePeriod(period1);
+  ));
 
-  // Access data
-  final periods = await periodTracker.getPeriods();
-  print(periods[0].startDate); // Print start date of the first period
-
-  // Prediction (for informational purposes only)
-  final predictedNextPeriod = await periodTracker.predictNextPeriodStart();
-  print('Predicted next period start: $predictedNextPeriod');
-
-  // Remember to display a disclaimer about prediction accuracy
+  // Example: Predict next period start date
+  DateTime nextPeriodStart = await tracker.predictNextPeriodStart();
+  print(
+      "Your next period is expected to start on: ${nextPeriodStart.toIso8601String().split('T')[0]}");
 }
