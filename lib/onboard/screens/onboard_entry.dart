@@ -32,7 +32,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     Onboard2(),
     Onboard3(),
     Onboard4(),
-    OnboardQuestion1(),
+    
   ];
 
   @override

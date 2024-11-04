@@ -4,4 +4,5 @@
         "widgte"
     ],
     "editor.fontFamily": "\"operator mono lig\",\"Consolas\", 'Courier New', monospace",
+    "editor.fontSize": 17,
 }
